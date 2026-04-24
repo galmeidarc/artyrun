@@ -24,11 +24,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '20'
 
       - name: Clean install
-        run: npm install --no-cache
+        run: npm ci --verbose
 
       - name: Build
         run: npm run build
