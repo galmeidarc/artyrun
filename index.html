@@ -1,13 +1,775 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    <title>Artyrun - Desafios Criativos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+            background-color: #ffffff;
+            color: #0f172a;
+            line-height: 1.6;
+        }
+
+        .mesh-bg {
+            background: 
+                radial-gradient(circle at 50% -20%, rgba(0, 112, 255, 0.08), transparent 70%),
+                radial-gradient(circle at 100% 100%, rgba(0, 112, 255, 0.03), transparent 50%),
+                radial-gradient(circle at 0% 0%, rgba(248, 250, 252, 1), transparent 50%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(226, 232, 240, 1);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 0.5rem;
+            background: #0070ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.025em;
+            color: #0f172a;
+        }
+
+        .btn-login {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #0f172a;
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 9999px;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            border-color: rgba(0, 112, 255, 0.5);
+            color: #0070ff;
+        }
+
+        .hero {
+            margin-top: 120px;
+            padding: 5rem 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: #0070ff;
+        }
+
+        .italic-text {
+            font-style: italic;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0070ff;
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 112, 255, 0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #0056cc;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 112, 255, 0.3);
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto;
+        }
+
+        .glass-box {
+            width: 100%;
+            height: 100%;
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gradient-blob {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: #0070ff;
+            filter: blur(60px);
+            opacity: 0.2;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.1); }
+        }
+
+        .section {
+            padding: 4rem 1.5rem;
+        }
+
+        .section-center {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            padding: 2.5rem;
+            border-radius: 2rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 25px rgba(0, 112, 255, 0.1);
+            transform: translateY(-4px);
+            border-color: rgba(0, 112, 255, 0.2);
+        }
+
+        .card-number {
+            font-size: 5rem;
+            font-weight: 900;
+            color: rgba(15, 23, 42, 0.1);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            z-index: 0;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(0, 112, 255, 0.05);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0070ff;
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .social-proof {
+            background: rgba(248, 250, 252, 0.5);
+            border-top: 1px solid rgba(226, 232, 240, 1);
+            border-bottom: 1px solid rgba(226, 232, 240, 1);
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .proof-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: rgba(148, 163, 184, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .proof-items {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            opacity: 0.3;
+        }
+
+        .proof-item {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #0f172a;
+        }
+
+        .features-section {
+            background: rgba(248, 250, 252, 0.5);
+            border-top: 1px solid rgba(226, 232, 240, 1);
+            border-bottom: 1px solid rgba(226, 232, 240, 1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid rgba(226, 232, 240, 1);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0070ff;
+            flex-shrink: 0;
+            font-size: 20px;
+        }
+
+        .feature-content h4 {
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-content p {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #94a3b8;
+        }
+
+        .philosophy {
+            text-align: center;
+            border-top: 1px solid rgba(226, 232, 240, 1);
+            background: rgba(248, 250, 252, 0.3);
+        }
+
+        .philosophy-divider {
+            width: 48px;
+            height: 4px;
+            background: #0070ff;
+            border-radius: 9999px;
+            margin: 0 auto 1rem;
+        }
+
+        .philosophy-label {
+            color: #0070ff;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .philosophy h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            font-style: italic;
+            color: #0f172a;
+            margin-bottom: 2rem;
+        }
+
+        .philosophy p {
+            color: #94a3b8;
+            font-weight: 500;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #0070ff 0%, #0056cc 100%);
+            border-radius: 4rem;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin: 2rem;
+            box-shadow: 0 20px 50px rgba(0, 112, 255, 0.3);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            filter: blur(150px);
+            transform: translate(50%, -50%);
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: -0.025em;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            color: rgba(191, 219, 254, 1);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            background: white;
+            color: #0070ff;
+            padding: 1.75rem 4rem;
+            border-radius: 9999px;
+            font-weight: 900;
+            font-size: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: rgba(240, 250, 255, 1);
+            transform: scale(1.05);
+        }
+
+        .cta-footer {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-footer span {
+            color: rgba(191, 219, 254, 1);
+            font-weight: 700;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        footer {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            border-top: 1px solid rgba(226, 232, 240, 1);
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .footer-logo {
+            width: 32px;
+            height: 32px;
+            background: #0070ff;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .footer-title {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+            color: #0f172a;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .footer-links a {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0070ff;
+        }
+
+        .footer-copyright {
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: #cbd5e1;
+            font-family: monospace;
+            letter-spacing: -0.025em;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                margin-top: 100px;
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.875rem;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="mesh-bg">
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">
+            <div class="nav-logo">🎨</div>
+            <div class="nav-title">Artyrun</div>
+        </div>
+        <button class="btn-login">Entrar</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>
+                Desafios <span class="highlight italic-text">criativos</span> estimulam sua <span class="highlight">arte</span>.
+            </h1>
+            <p>Entre em um desafio ou grupo. Acompanhe e registre suas atividades criativas.</p>
+            <a href="https://www.apple.com/br/app-store/" target="_blank" class="btn-primary">
+                Comece sua jornada →
+            </a>
+        </div>
+        <div class="hero-visual">
+            <div class="glass-box">
+                <div class="gradient-blob"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <div class="social-proof">
+        <p class="proof-text">Criadores ao redor do mundo estão construindo hábitos</p>
+        <div class="proof-items">
+            <span class="proof-item">Designers</span>
+            <span class="proof-item">Artistas</span>
+            <span class="proof-item">Musicistas</span>
+            <span class="proof-item">Escritores</span>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <section class="section">
+        <div class="section-center">
+            <h2 class="section-title">Treine o hábito de criar com <span class="highlight">Artyrun</span></h2>
+            <p style="text-align: center; color: #94a3b8; font-weight: 500; margin-bottom: 3rem;">Simples, divertido e viciante.</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-number">01</div>
+                    <div class="card-content">
+                        <div class="card-icon">📸</div>
+                        <h3 class="card-title">Foto ou Fake</h3>
+                        <p class="card-desc">Registre sua atividade diária em um check-in com foto.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">02</div>
+                    <div class="card-content">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">Análise imediata</h3>
+                        <p class="card-desc">Cada atividade gera dados para entender sua obra.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-number">03</div>
+                    <div class="card-content">
+                        <div class="card-icon">🏆</div>
+                        <h3 class="card-title">Ranking Criativo</h3>
+                        <p class="card-desc">Sistema de pontuação para estimular mais atividades.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://www.apple.com/br/app-store/" target="_blank" class="btn-primary">
+                    Explore as possibilidades →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section features-section">
+        <div class="section-center">
+            <div class="features-grid">
+                <div>
+                    <h2 style="font-size: 3rem; font-weight: 900; letter-spacing: -0.025em; color: #0f172a; margin-bottom: 3rem; line-height: 1.2;">
+                        Construa mais do que <span class="highlight italic-text">ideias</span>.<br>Construa um hábito.
+                    </h2>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-content">
+                                <h4>Flow Criativo</h4>
+                                <p>Estimule seu foco</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">✨</div>
+                            <div class="feature-content">
+                                <h4>Estilo Único</h4>
+                                <p>Descubra sua identidade</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">🎯</div>
+                            <div class="feature-content">
+                                <h4>Desafios Diários</h4>
+                                <p>Para manter a chama viva</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">⭐</div>
+                            <div class="feature-content">
+                                <h4>Ganhe pontos</h4>
+                                <p>E desafie seus amigos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="background: white; padding: 2rem; border-radius: 2.5rem; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); border: 1px solid rgba(226, 232, 240, 1); margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(226, 232, 240, 1);">
+                            <span style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em;">Semana atual</span>
+                            <span style="font-size: 20px;">📅</span>
+                        </div>
+                        <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+                            <div style="flex: 1; height: 56px; background: #0070ff; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 112, 255, 0.2);"></div>
+                            <div style="flex: 1; height: 56px; background: #0070ff; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 112, 255, 0.2);"></div>
+                            <div style="flex: 1; height: 56px; background: #0070ff; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 112, 255, 0.2);"></div>
+                            <div style="flex: 1; height: 56px; background: #0070ff; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 112, 255, 0.2);"></div>
+                            <div style="flex: 1; height: 56px; background: #0070ff; border-radius: 0.75rem; box-shadow: 0 8px 16px rgba(0, 112, 255, 0.2);"></div>
+                            <div style="flex: 1; height: 56px; background: #e2e8f0; border-radius: 0.75rem;"></div>
+                            <div style="flex: 1; height: 56px; background: #e2e8f0; border-radius: 0.75rem;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid rgba(226, 232, 240, 1);">
+                            <div>
+                                <div style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.25rem;">Sessão</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; letter-spacing: -0.025em; color: #0f172a;">45m</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.75rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 0.25rem;">Streak</div>
+                                <div style="font-size: 1.5rem; font-weight: 900; letter-spacing: -0.025em; color: #0070ff;">12 Dias</div>
+                            </div>
+                            <div style="width: 48px; height: 48px; border: 4px solid rgba(0, 112, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <div style="width: 16px; height: 16px; border-radius: 50%; background: #0070ff; animation: pulse 2s ease-in-out infinite;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 2rem; border-radius: 2.5rem; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); border: 1px solid rgba(226, 232, 240, 1); display: flex; align-items: center; gap: 1.5rem;">
+                        <div style="padding: 1rem; background: rgba(0, 112, 255, 0.05); border-radius: 1rem; font-size: 24px;">🌙</div>
+                        <div>
+                            <h4 style="font-weight: 700; font-style: italic; color: #0f172a; font-size: 1.125rem; margin-bottom: 0.25rem;">Pico Noturno</h4>
+                            <p style="font-size: 0.875rem; color: #64748b; font-weight: 500;">Você é 40% mais produtivo após as 22h.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="section philosophy">
+        <div class="section-center" style="max-width: 700px; padding: 5rem 1.5rem;">
+            <span class="philosophy-divider"></span>
+            <span class="philosophy-label">Nossa Filosofia</span>
+            <h2>"Arte é consistência"</h2>
+            <p>Aspirantes a artistas acreditam que criatividade é um talento inato. Vamos provar que todos podem ser artistas.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 4rem 1.5rem;">
+        <div class="section-center">
+            <div class="cta-section">
+                <div class="cta-content">
+                    <h2>Pronto para sua<br>primeira criação?</h2>
+                    <p>Junte-se a milhares de criadores e transforme seus dados em beleza pura.</p>
+                    <button class="cta-button" onclick="window.open('https://www.apple.com/br/app-store/')">Comece agora</button>
+                    <div class="cta-footer">
+                        <span>✓ Grátis para começar</span>
+                        <span style="color: rgba(255, 255, 255, 0.2);">•</span>
+                        <span>Sem cartão de crédito</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">
+            <div class="footer-logo">🎨</div>
+            <div class="footer-title">Artyrun</div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Termos</a>
+            <a href="#">Privacidade</a>
+        </div>
+        <div class="footer-copyright">© 2026 ARTYRUN LABS. ALL ART RESERVED.</div>
+    </footer>
+</body>
+</html>
