@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artyrun | Transforme seus hábitos em arte</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-mesh {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(214,100%,98%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(210,100%,96%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(208,100%,94%,1) 0, transparent 50%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px border rgba(255, 255, 255, 0.4);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.1);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-soft { animation: pulse-soft 3s infinite; }
+    </style>
+</head>
+<body class="bg-mesh min-h-screen text-slate-900 selection:bg-blue-100">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between glass-card py-4 px-8 rounded-full shadow-lg shadow-slate-200/50">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-black tracking-tighter text-slate-800">Artyrun</span>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <a href="#github" class="hidden md:flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-blue-500 transition-colors">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    GitHub
+                </a>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full text-sm transition-all shadow-md shadow-blue-500/10">
+                    Baixar App
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 py-20 flex flex-col lg:flex-row items-center gap-16">
+            <div class="flex-1 space-y-8 text-center lg:text-left">
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight tracking-tighter text-slate-900">
+                    Torne seu hábito <br>
+                    <span class="text-blue-500 italic">criativo</span> uma <br>
+                    <span class="text-blue-500 text-glow">obra de arte.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                    Artyrun é o app que transforma sua consistência em arte generativa viva. Registre, evolua e visualize sua jornada criativa.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-full transition-all flex items-center justify-center gap-2 shadow-xl shadow-blue-500/20 group">
+                        <span>Começar Gratuitamente</span>
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visualization Sim -->
+            <div class="flex-1 w-full max-w-xl space-y-4">
+                <div class="bg-white p-8 rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-slate-100 space-y-6">
+                    <div class="h-64 bg-slate-50 rounded-[2rem] relative overflow-hidden flex items-center justify-center group cursor-pointer border border-dashed border-slate-200 hover:border-blue-200 transition-all">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent"></div>
+                        <!-- Mock Generative Art Shape -->
+                        <div class="relative w-32 h-32 bg-blue-500/10 rounded-full animate-pulse-soft flex items-center justify-center">
+                            <div class="w-24 h-24 bg-blue-500/20 rounded-full blur-xl"></div>
+                            <i data-lucide="sparkles" class="text-blue-500 w-12 h-12 absolute"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sua Semana</span>
+                            <i data-lucide="calendar" class="w-4 h-4 text-slate-300"></i>
+                        </div>
+                        <div class="flex gap-2">
+                            <div class="h-10 flex-1 bg-blue-500 rounded-lg shadow-lg shadow-blue-500/20"></div>
+                            <div class="h-10 flex-1 bg-blue-500 rounded-lg shadow-lg shadow-blue-500/20"></div>
+                            <div class="h-10 flex-1 bg-blue-400 rounded-lg opacity-80"></div>
+                            <div class="h-10 flex-1 bg-blue-500 rounded-lg shadow-lg shadow-blue-500/20"></div>
+                            <div class="h-10 flex-1 bg-slate-100 rounded-lg"></div>
+                            <div class="h-10 flex-1 bg-slate-100 rounded-lg"></div>
+                            <div class="h-10 flex-1 bg-slate-100 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof -->
+        <section class="bg-slate-50/50 py-12 border-y border-slate-100">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-sm font-semibold text-slate-400 uppercase tracking-[0.3em]">Utilizado por criativos de todo o mundo</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-8 md:gap-24 opacity-30 font-bold italic text-xl grayscale pointer-events-none">
+                    <span>DESIGNERS</span>
+                    <span>ARTISTAS</span>
+                    <span>MÚSICOS</span>
+                    <span>ESCRITORES</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="container mx-auto px-6 py-32 space-y-20">
+            <div class="text-center space-y-4 max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight text-slate-900">Como o <span class="text-blue-500">Artyrun</span> ajuda você</h2>
+                <p class="text-slate-400 text-lg font-medium">Construir um hábito não precisa ser chato. Transformamos progresso em recompensa visual.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <div class="p-10 glass-card bg-white rounded-[2.5rem] card-hover transition-all space-y-6">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500">
+                        <i data-lucide="zap" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Check-in Rápido</h3>
+                    <p class="text-slate-500 leading-relaxed font-medium">Registre sua atividade do dia em segundos. Sem burocracia, apenas sua arte.</p>
+                </div>
+                <div class="p-10 glass-card bg-white rounded-[2.5rem] card-hover transition-all space-y-6">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Dados Vivos</h3>
+                    <p class="text-slate-500 leading-relaxed font-medium">Acompanhe estatísticas reais sobre sua frequência e evolução técnica.</p>
+                </div>
+                <div class="p-10 glass-card bg-white rounded-[2.5rem] card-hover transition-all space-y-6">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500">
+                        <i data-lucide="layers" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-800">Galeria de Arte</h3>
+                    <p class="text-slate-500 leading-relaxed font-medium">Cada hábito concluído gera elementos únicos em uma galeria generativa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="container mx-auto px-6 py-20 pb-40">
+            <div class="relative bg-blue-500 rounded-[4rem] p-12 md:p-24 overflow-hidden text-center shadow-2xl shadow-blue-500/30">
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative z-10 space-y-10">
+                    <h2 class="text-4xl md:text-7xl font-black text-white leading-tight">Pronto para criar <br> com consistência?</h2>
+                    <p class="text-xl text-blue-100 font-medium max-w-lg mx-auto">Baixe agora e comece a transformar seus dias em arte. Disponível para iOS e Android.</p>
+                    <button class="bg-white text-blue-500 hover:bg-slate-50 font-black py-6 px-12 rounded-full transition-all text-xl uppercase tracking-tight shadow-2xl hover:scale-105 active:scale-95">
+                        Baixar Artyrun
+                    </button>
+                    <div class="flex items-center justify-center gap-4 text-white/60 text-xs font-bold uppercase tracking-widest">
+                        <span>Gratuito para começar</span>
+                        <span class="w-1 h-1 bg-white/20 rounded-full"></span>
+                        <span>Sem cartão necessário</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-2 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-white">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-xl font-black text-slate-800">Artyrun</span>
+                    </div>
+                    <p class="text-slate-400 font-medium max-w-xs">Capacitando criadores a construir hábitos duradouros através da arte visual.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-6 uppercase text-xs tracking-widest">Suporte</h4>
+                    <ul class="space-y-4 text-slate-500 font-medium text-sm">
+                        <li><a href="mailto:artyrun@gmail.com" class="hover:text-blue-500">Contato</a></li>
+                        <li><a href="termos.html" class="hover:text-blue-500">Termos de Uso</a></li>
+                        <li><a href="privacidade.html" class="hover:text-blue-500">Privacidade</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-6 uppercase text-xs tracking-widest">Idioma</h4>
+                    <div class="flex flex-col gap-2 text-sm font-bold">
+                        <a href="index.html" class="text-blue-500">Português (BR)</a>
+                        <a href="en/index.html" class="text-slate-400 hover:text-slate-600">English</a>
+                        <a href="es/index.html" class="text-slate-400 hover:text-slate-600">Español</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-12 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-xs font-bold text-slate-300 uppercase tracking-widest">© 2026 Artyrun Labs. Todos os direitos reservados.</p>
+                <div class="flex gap-6 text-slate-300">
+                    <i data-lucide="instagram" class="w-5 h-5 hover:text-blue-500 cursor-pointer transition-colors"></i>
+                    <i data-lucide="twitter" class="w-5 h-5 hover:text-blue-500 cursor-pointer transition-colors"></i>
+                    <i data-lucide="linkedin" class="w-5 h-5 hover:text-blue-500 cursor-pointer transition-colors"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
