@@ -896,6 +896,86 @@
     .note-chip.yellow { background: rgba(248,190,47,.26); }
     .note-chip.lavender { background: rgba(168,139,232,.16); }
 
+    .home-journal {
+      margin-top: 84px;
+      padding: 54px;
+      border-radius: 40px;
+      background: #111;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+    .home-journal::after {
+      content: "✱";
+      position: absolute;
+      right: -28px;
+      top: -58px;
+      font-size: 210px;
+      line-height: 1;
+      color: var(--lavender);
+      opacity: .92;
+      transform: rotate(8deg);
+    }
+    .home-journal-head {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+    .home-journal-head h2 {
+      margin: 8px 0 0;
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: .92;
+      letter-spacing: -.04em;
+    }
+    .home-journal-head p { margin: 0; max-width: 420px; color: rgba(255,255,255,.7); }
+    .journal-home-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.25fr 1fr 1fr;
+      gap: 14px;
+    }
+    .journal-home-card {
+      min-height: 230px;
+      padding: 24px;
+      border-radius: 28px;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(255,255,255,.16);
+      transition: transform .18s ease;
+    }
+    .journal-home-card:hover { transform: translateY(-4px); }
+    .journal-home-card:nth-child(1) { background: var(--yellow); }
+    .journal-home-card:nth-child(2) { background: var(--lavender-soft); }
+    .journal-home-card:nth-child(3) { background: #E8EBD8; }
+    .journal-home-card small {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(17,17,17,.64);
+    }
+    .journal-home-card h3 { margin: 20px 0 8px; font-size: 28px; line-height: 1.02; letter-spacing: -.03em; }
+    .journal-home-card p { margin: 0; font-size: 13px; color: rgba(17,17,17,.7); }
+    .journal-home-link {
+      position: relative;
+      z-index: 1;
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      color: white;
+    }
+
     .cta-band {
       margin: 84px auto 36px;
       padding: 28px 30px;
@@ -1033,6 +1113,22 @@
       .quote-card { grid-template-columns: 1fr; }
       .manifesto { font-size: 54px; }
       .poster, .tote-card { min-height: 310px; }
+      .home-journal { margin-top: 60px; padding: 30px 18px; border-radius: 30px; }
+      .home-journal::after { font-size: 130px; top: -34px; right: -22px; }
+      .home-journal-head { grid-template-columns: 1fr; }
+      .home-journal-head h2 { font-size: 44px; max-width: 280px; }
+      .journal-home-grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: min(82vw, 310px);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 12px;
+        padding: 4px 24px 14px 0;
+        scrollbar-width: none;
+      }
+      .journal-home-grid::-webkit-scrollbar { display: none; }
+      .journal-home-card { scroll-snap-align: start; min-height: 215px; }
       .cta-band h2 { font-size: 44px; }
       section.block { padding: 60px 0; }
     }
@@ -1416,6 +1512,31 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section class="container home-journal reveal" aria-labelledby="caderno-title">
+      <div class="home-journal-head">
+        <div>
+          <div class="eyebrow" style="color:rgba(255,255,255,.58);">Caderno ArtyRun</div>
+          <h2 id="caderno-title" class="serif">ideias para<br>continuar criando.</h2>
+        </div>
+        <p>Textos sobre hábito criativo, desafios, repertório e processo. Conteúdo para transformar inspiração em prática.</p>
+      </div>
+      <div class="journal-home-grid">
+        <a class="journal-home-card" href="artigos/como-criar-o-habito-de-fazer-arte/">
+          <small>hábito criativo · 7 min</small>
+          <div><h3>Como criar o hábito de fazer arte</h3><p>Uma prática pequena, repetível e possível até nos dias corridos.</p></div>
+        </a>
+        <a class="journal-home-card" href="artigos/inktober-origem-como-funciona-e-por-que-importa/">
+          <small>cultura criativa · 7 min</small>
+          <div><h3>Inktober: origem e por que importa</h3><p>Como um desafio de outubro virou um ritual criativo compartilhado.</p></div>
+        </a>
+        <a class="journal-home-card" href="artigos/7-desafios-criativos-para-voltar-a-criar/">
+          <small>desafios · 6 min</small>
+          <div><h3>7 desafios para voltar a criar</h3><p>Propostas curtas para sair da intenção e colocar a prática em movimento.</p></div>
+        </a>
+      </div>
+      <a class="journal-home-link" href="artigos/index.html">ver todos os artigos <i data-lucide="arrow-right"></i></a>
     </section>
 
     <section class="container cta-band reveal">
