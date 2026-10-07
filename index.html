@@ -626,6 +626,7 @@
       font-size: 14px;
     }
     .showcase-points i { width: 16px; height: 16px; color: var(--lavender); }
+    .mobile-swipe-hint { display: none; }
 
     .phones-row {
       display: grid;
@@ -963,20 +964,60 @@
       .nav-inner { height: 66px; }
       .nav-actions .btn { display: none; }
       .brand { font-size: 27px; }
-      .hero { padding-top: 52px; }
-      .hero-title { font-size: clamp(62px, 19vw, 92px); }
-      .tagline { font-size: 22px; }
+      .hero { padding-top: 40px; }
+      .hero-title { font-size: clamp(60px, 18vw, 82px); }
+      .tagline {
+        max-width: 100%;
+        justify-content: center;
+        padding: 12px 16px;
+        border-radius: 22px;
+        font-size: 21px;
+        line-height: 1.08;
+      }
       .hero-sub { font-size: 17px; }
-      .hero-meta { gap: 14px; }
-      .hero-visual { min-height: 560px; }
-      .hero-note, .hero-panel { display: none; }
-      .phone-shell { width: 284px; }
-      .screen { min-height: 540px; }
-      .floating-chip { top: 80px; right: 0; font-size: 13px; padding: 12px 14px; }
+      .hero-actions { gap: 10px; }
+      .store { min-width: 146px; padding-left: 12px; padding-right: 12px; }
+      .hero-meta { gap: 10px 16px; font-size: 13px; }
+      .hero-visual { min-height: 552px; margin-top: 8px; }
+      .hero-note, .hero-panel, .floating-chip { display: none; }
+      .phone-shell { width: min(276px, 78vw); top: 4px; }
+      .screen { min-height: 520px; }
       .steps { grid-template-columns: 1fr; }
-      .phones-row { grid-template-columns: 1fr; }
-      .mini-phone { max-width: 310px; width: 100%; margin: 0 auto; }
-      .showcase-copy { text-align: center; }
+      .showcase-grid { gap: 22px; }
+      .phones-row {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: min(82vw, 310px);
+        gap: 14px;
+        width: calc(100vw - 12px);
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 0 28px;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+        padding: 6px 30px 18px 0;
+        scrollbar-width: none;
+      }
+      .phones-row::-webkit-scrollbar { display: none; }
+      .phones-row > div {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+      }
+      .mini-phone { max-width: none; width: 100%; margin: 0; }
+      .mobile-swipe-hint {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 18px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        color: var(--muted);
+      }
+      .mobile-swipe-hint i { width: 15px; height: 15px; }
+      .showcase-copy { text-align: center; padding: 0 6px; }
       .showcase-copy p { margin-left: auto; margin-right: auto; }
       .showcase-points { justify-items: center; }
       .community { margin-top: 60px; }
@@ -1204,6 +1245,7 @@
           </div>
 
           <a href="#comunidade" class="btn btn-yellow">ver todos os recursos <i data-lucide="arrow-right"></i></a>
+          <div class="mobile-swipe-hint"><span>deslize para ver as telas</span><i data-lucide="arrow-right"></i></div>
         </div>
 
         <div class="phones-row reveal">
